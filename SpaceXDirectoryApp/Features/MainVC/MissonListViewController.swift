@@ -1,0 +1,118 @@
+//
+//  ViewController.swift
+//  SpaceXDirectoryApp
+//
+//  Created by Кирилл Бережной on 08.12.2023.
+//
+
+import UIKit
+import Stevia
+import RxSwift
+import RxCocoa
+
+// MARK: - MissonListViewController
+final class MissonListViewController: UIViewController {
+    
+    // MARK: - Private properties
+    private lazy var tbl: UITableView = {
+        let tbl = UITableView()
+        tbl.backgroundColor = .blackBG
+        tbl.dataSource = self
+        tbl.delegate = self
+        tbl.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
+        return tbl
+    }()
+    
+    private lazy var router = MissionListRouter(navigationController: navigationController)
+    private var viewModel: MissionListViewModel
+    private let bag = DisposeBag()
+
+    // MARK: - Life cycle
+    init(repository: MissionListRepository) {
+        self.viewModel = MissionListViewModel(repository: repository)
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        setupBindings()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupUI()
+    }
+    
+    // MARK: - Private methods
+    
+    private func setupBindings() {
+        viewModel.reloadTable
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.tbl.reloadData()
+            })
+            .disposed(by: bag)
+    }
+    
+    private func setupUI() {
+        view.subviews (
+            tbl
+        )
+        
+        setupNavigationTitle()
+        createConstraints()
+    }
+    
+    private func createConstraints() {
+        tbl.Top == view.Top
+        tbl.Left == view.Left
+        tbl.Right == view.Right
+        tbl.Bottom == view.Bottom
+    }
+    
+    private func setupNavigationTitle() {
+        guard let navigationController = navigationController else { return }
+        
+        navigationItem.title = "SpaceX missions"
+        
+        if #available(iOS 13.0, *) {
+            navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        } else {
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        }
+    }
+}
+
+
+// MARK: - UITableViewDataSource
+extension MissonListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.numberOfRows()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tbl.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier) as? MainTableViewCell
+        guard let tblCell = cell else { return UITableViewCell() }
+        let cellMission = viewModel.recieveMission(indexPath: indexPath)
+        tblCell.fill(missionModel: cellMission)
+        return tblCell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension MissonListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        Constants.kCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let missionCacheElement = viewModel.repository.missionCache?[indexPath.row] else { return }
+        router.run(route: .showDetail(parameters: missionCacheElement))
+    }
+}
+
