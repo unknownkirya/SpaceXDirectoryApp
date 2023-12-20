@@ -8,6 +8,7 @@
 import UIKit
 import Stevia
 
+// MARK: - MainTableViewCell
 final class MainTableViewCell: UITableViewCell {
     
     // MARK: - Private properties

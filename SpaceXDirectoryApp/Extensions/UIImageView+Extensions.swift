@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - UIImageView
 extension UIImageView {
     func load(url: String?) {
         DispatchQueue.global().async {

@@ -10,9 +10,6 @@ import Foundation
 // MARK: - CrewmateModel
 struct CrewmateModel: Decodable {
     let name, agency: String
-    let image: String
-    let wikipedia: String
-    let launches: [String]
     let status: String
     let id: String
 }

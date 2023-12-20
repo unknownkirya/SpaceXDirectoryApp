@@ -8,24 +8,12 @@ import Foundation
 
 // MARK: - MissionElement
 struct MissionElement: Decodable {
-    //let fairings: Fairings?
     let links: Links
-    //let staticFireDateUTC: String?
-    //let staticFireDateUnix: Int?
-    //let net: Bool
-    //let window: Int?
-    //let rocket: Rocket
     let success: Bool?
-    //let failures: [Failure]
     let details: String?
-    let crew, ships, capsules, payloads: [String]
-    //let launchpad: Launchpad
-    //let flightNumber: Int
+    let crew: [String]
     let name, dateUtc: String
-    //let dateUnix: Int
     let dateLocal: Date
-    //let datePrecision: DatePrecision
-    //let upcoming: Bool
     let cores: [Core]
 }
 

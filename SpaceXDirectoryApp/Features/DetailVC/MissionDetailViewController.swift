@@ -168,6 +168,7 @@ final class MissionDetailViewController: UIViewController {
     }
 }
 
+// MARK: - MissionDetailViewController
 extension MissionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRowsOfCrew()

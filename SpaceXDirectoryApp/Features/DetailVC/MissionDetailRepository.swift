@@ -21,6 +21,7 @@ class MissionDetailRepository: BaseRepository {
     
 }
 
+// MARK: - MissionDetailRepositoryImpl
 final class MissionDetailRepositoryImpl: MissionDetailRepository {
     
     // MARK: Private properties

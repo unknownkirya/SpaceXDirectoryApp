@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 
+// MARK: - BaseRepository protocol
 protocol BaseRepository: AnyObject {
     
     associatedtype T
