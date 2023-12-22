@@ -7,6 +7,8 @@
 
 import UIKit
 import Stevia
+import RxSwift
+import RxCocoa
 
 // MARK: - MissionDetailViewController
 final class MissionDetailViewController: UIViewController {
@@ -16,6 +18,7 @@ final class MissionDetailViewController: UIViewController {
     
     // MARK: Private properties
     private let displayItem: MissionDetail
+    private let bag = DisposeBag()
     
     private var img: UIImageView = {
         let img = UIImageView()
@@ -57,7 +60,8 @@ final class MissionDetailViewController: UIViewController {
         self.viewModel = viewModel
         self.displayItem = viewModel.getDisplayItem()
         super.init(nibName: nil, bundle: nil)
-        
+
+        setupBindings()
         fill()
     }
     
@@ -72,7 +76,6 @@ final class MissionDetailViewController: UIViewController {
     }
     
     // MARK: - Private functions
-    
     private func fill() {
         img.load(url: displayItem.icon)
         lblName.text = displayItem.name
@@ -80,6 +83,19 @@ final class MissionDetailViewController: UIViewController {
         lblStatus.text = "Status: \(displayItem.status)"
         lblDate.text = "Date: \(displayItem.dateString)"
         txtDetails.text = displayItem.details
+        
+        if displayItem.crew.count == 0 {
+            lblCrew.text = ""
+        }
+    }
+    
+    private func setupBindings() {
+        viewModel.reloadTable
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.tbl.reloadData()
+            })
+            .disposed(by: bag)
     }
     
     private func setupUI() {
@@ -177,10 +193,10 @@ extension MissionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tbl.dequeueReusableCell(withIdentifier: CrewTableViewCell.identifier) as? CrewTableViewCell
         guard let tblCell = cell else { return UITableViewCell() }
-        let crewmate = viewModel.crewmateForId(id: displayItem.crew[indexPath.row])
+        print(indexPath.row)
+        print(viewModel)
+        let crewmate = viewModel.crewmateForId(for: indexPath)
         tblCell.fill(crewmateExample: crewmate)
-        print(displayItem.crew[indexPath.row])
-        print(crewmate)
         
         return tblCell
     }

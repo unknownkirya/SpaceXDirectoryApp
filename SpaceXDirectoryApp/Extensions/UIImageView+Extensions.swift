@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - UIImageView
 extension UIImageView {
-    func load(url: String?) {
+    func load(url: String?) { // -> URLSessionTask
         DispatchQueue.global().async {
             if let url = url {
                 if let imageUrl = URL(string: url) {

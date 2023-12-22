@@ -16,12 +16,12 @@ protocol MissonListViewModelProtocol {
 
 // MARK: - Struct
 struct Mission {
-    var icon: String?
-    var name: String
-    var firstStageReuses: Int
-    var success: String
-    var dateString: String
-    var date: Date
+    let icon: String?
+    let name: String
+    let firstStageReuses: Int
+    let success: String
+    let dateString: String
+    let date: Date
 }
 
 // MARK: - MainViewModel
@@ -61,6 +61,6 @@ final class MissionListViewModel: MissonListViewModelProtocol {
     }
     
     func recieveMission(indexPath: IndexPath) -> Mission {
-        return displayItems[indexPath.row]
+        displayItems[indexPath.row]
     }
 }

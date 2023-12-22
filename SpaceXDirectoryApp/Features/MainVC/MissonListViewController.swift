@@ -14,6 +14,10 @@ import RxCocoa
 final class MissonListViewController: UIViewController {
     
     // MARK: - Private properties
+    private let viewModel: MissionListViewModel
+    private let bag = DisposeBag()
+    private lazy var router = MissionListRouter(navigationController: navigationController)
+    
     private lazy var tbl: UITableView = {
         let tbl = UITableView()
         tbl.backgroundColor = .blackBG
@@ -22,10 +26,6 @@ final class MissonListViewController: UIViewController {
         tbl.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
         return tbl
     }()
-    
-    private lazy var router = MissionListRouter(navigationController: navigationController)
-    private var viewModel: MissionListViewModel
-    private let bag = DisposeBag()
 
     // MARK: - Life cycle
     init(repository: MissionListRepository) {
@@ -47,7 +47,6 @@ final class MissonListViewController: UIViewController {
     }
     
     // MARK: - Private methods
-    
     private func setupBindings() {
         viewModel.reloadTable
             .asDriver(onErrorDriveWith: .never())
@@ -62,28 +61,20 @@ final class MissonListViewController: UIViewController {
             tbl
         )
         
+        tbl.fillContainer()
+        
         setupNavigationTitle()
-        createConstraints()
-    }
-    
-    private func createConstraints() {
-        tbl.Top == view.Top
-        tbl.Left == view.Left
-        tbl.Right == view.Right
-        tbl.Bottom == view.Bottom
     }
     
     private func setupNavigationTitle() {
-        guard let navigationController = navigationController else { return }
+        guard let navigationController else { return }
         
         navigationItem.title = "SpaceX missions"
+        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         if #available(iOS 13.0, *) {
             navigationController.navigationBar.prefersLargeTitles = true
-            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        } else {
-            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
     }
 }

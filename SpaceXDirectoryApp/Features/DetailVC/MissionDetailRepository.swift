@@ -11,13 +11,9 @@ import RxMoya
 import Moya
 
 // MARK: - MissionListRepository
-class MissionDetailRepository: BaseRepository {
-
-    typealias T = CrewmateModels
+protocol MissionDetailRepository {
     
-    func get() -> Single<CrewmateModels> {
-        fatalError("Must be overriden!")
-    }
+    func get() -> Single<CrewmateModels>
     
 }
 
@@ -31,12 +27,12 @@ final class MissionDetailRepositoryImpl: MissionDetailRepository {
     private let decoder = JSONDecoder()
     
     // MARK: - Life Cycle
-    override init() {
+    init() {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
     
-    // MARK: - Overrided functions
-    override func get() -> Single<CrewmateModels> {
+    // MARK: - Public function
+    func get() -> Single<CrewmateModels> {
         provider.rx
             .request(.fetchCrewmates)
             .filterSuccessfulStatusCodes()

@@ -10,7 +10,6 @@
 		314DB4692B3317BC0034FA81 /* CrewmateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DB4682B3317BC0034FA81 /* CrewmateModel.swift */; };
 		314DB46B2B3318A10034FA81 /* MissionDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DB46A2B3318A10034FA81 /* MissionDetailRepository.swift */; };
 		3159FCEB2B3037FC00E66866 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCEA2B3037FC00E66866 /* UIImageView+Extensions.swift */; };
-		3159FCF02B3059C400E66866 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCEF2B3059C400E66866 /* BaseRepository.swift */; };
 		3159FCF22B305A2B00E66866 /* MissionListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCF12B305A2B00E66866 /* MissionListRepository.swift */; };
 		3159FCF42B30750200E66866 /* MissionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCF32B30750200E66866 /* MissionDetailViewModel.swift */; };
 		3159FCF82B3088AC00E66866 /* MissionListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCF72B3088AC00E66866 /* MissionListUseCase.swift */; };
@@ -43,7 +42,6 @@
 		314DB4682B3317BC0034FA81 /* CrewmateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewmateModel.swift; sourceTree = "<group>"; };
 		314DB46A2B3318A10034FA81 /* MissionDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailRepository.swift; sourceTree = "<group>"; };
 		3159FCEA2B3037FC00E66866 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
-		3159FCEF2B3059C400E66866 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 		3159FCF12B305A2B00E66866 /* MissionListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionListRepository.swift; sourceTree = "<group>"; };
 		3159FCF32B30750200E66866 /* MissionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailViewModel.swift; sourceTree = "<group>"; };
 		3159FCF72B3088AC00E66866 /* MissionListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionListUseCase.swift; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 		8ED604B02B27204600371A41 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				3159FCEF2B3059C400E66866 /* BaseRepository.swift */,
 				8ED604B12B27205F00371A41 /* BaseRouter.swift */,
 				3159FCFD2B32F78D00E66866 /* BaseUseCase.swift */,
 				8E7CA0B32B2337900031CA29 /* Constants.swift */,
@@ -295,7 +292,6 @@
 				8E7CA0AC2B23082E0031CA29 /* UIColor+Etensions.swift in Sources */,
 				8E7CA0832B22EFDD0031CA29 /* AppDelegate.swift in Sources */,
 				3159FD002B33085D00E66866 /* CrewTableViewCell.swift in Sources */,
-				3159FCF02B3059C400E66866 /* BaseRepository.swift in Sources */,
 				3159FCFC2B31919000E66866 /* MissionDetailUseCase.swift in Sources */,
 				8ED604AE2B26FEC800371A41 /* UITableViewCell+Extensions.swift in Sources */,
 				8E7CA0A92B22FF530031CA29 /* MissionModel.swift in Sources */,

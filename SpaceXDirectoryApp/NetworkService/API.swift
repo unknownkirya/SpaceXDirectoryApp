@@ -11,7 +11,6 @@ import Moya
 // MARK: - API Enum
 enum API {
     case fetchMissions
-//    case fetchCrewmates(id: String)
     case fetchCrewmates
 }
 
@@ -26,8 +25,6 @@ extension API: TargetType {
         switch self {
         case .fetchMissions:
             return "launches"
-//        case let .fetchCrewmates(id):
-//                        return "crew/\(id)"
         case .fetchCrewmates:
             return "crew"
         }

@@ -11,7 +11,6 @@ import Foundation
 final class MissionDetailUseCase {
     
     // MARK: - Public functions
-    
     func prepareSortedItems(parametrs: MissionModels) -> MissionModels {
         let dateToCheck = Constants.formatter.date(from: "01-01-2021") ?? Date()
         var sortedMissionModels: MissionModels = []
@@ -44,13 +43,12 @@ final class MissionDetailUseCase {
         return MissionDetail(icon: icon, name: name, firstStageReuses: firstStageReuses, status: successString, dateString: date, details: details, crew: crew)
     }
     
-    func prepareCrewmateItem(parameters: CrewmateModels) -> [String: Crewmate] {
-        var displayElements: [String: Crewmate] = [:]
-        
+    func prepareCrewmateItem(parameters: CrewmateModels) -> [Crewmate] {
+        var crewmates: [Crewmate] = []
         parameters.forEach { element in
             let crewmate = Crewmate(name: element.name, agency: element.agency, status: element.status)
-            displayElements[element.id] = crewmate
+            crewmates.append(crewmate)
         }
-        return displayElements
+        return crewmates
     }
 }

@@ -36,11 +36,6 @@ final class MainTableViewCell: UITableViewCell {
     
     // MARK: - Public methods
     func fill(missionModel: Mission) {
-//        if let icon = missionModel.icon {
-//            img.load(url: icon)
-//        } else {
-//            img.image = UIImage(named: "notFoundImage")
-//        }
         img.load(url: missionModel.icon)
         lblName.text = missionModel.name
         lblFlights.text = "First stage reuses: \(String(missionModel.firstStageReuses))"
@@ -50,8 +45,8 @@ final class MainTableViewCell: UITableViewCell {
     
     // MARK: - Private methods
     private func setupUI() {
-        self.backgroundColor = .blackBG
-        self.selectionStyle = .none
+        backgroundColor = .blackBG
+        selectionStyle = .none
         subviews (
             img,
             lblName,
@@ -64,34 +59,34 @@ final class MainTableViewCell: UITableViewCell {
     }
     
     private func createConstraints() {
-        let leftIndent: CGFloat = 15
-        let topIndent: CGFloat = 10
-        let imgWidth: CGFloat = 55
-        let imgHeight: CGFloat = 55
-        let lblWidth: CGFloat = 135
-        let lblHeight: CGFloat = 20
+        let leftIndent: CGFloat = 12
+        let topIndent: CGFloat = 8
+        let imgWidth: CGFloat = 65
+        let imgHeight: CGFloat = 65
+        let lblWidth: CGFloat = 145
+        let lblHeight: CGFloat = 25
         
-        img.CenterY == self.CenterY
-        img.Left == self.Left + leftIndent
+        img.CenterY == contentView.CenterY
+        img.Left == contentView.Left + leftIndent
         img.Width == imgWidth
         img.Height == imgHeight
         
-        lblName.Top == self.Top + topIndent
+        lblName.Top == contentView.Top + topIndent
         lblName.Left == img.Right + leftIndent
         lblName.Width == lblWidth
-        lblName.Height == lblHeight
+        lblName.Height == lblHeight * 1.5
         
         lblFlights.Top == lblName.Bottom + topIndent
         lblFlights.Left == img.Right + leftIndent
         lblFlights.Width == lblWidth
         lblFlights.Height == lblHeight
         
-        lblStatus.Top == self.Top + topIndent
+        lblStatus.Top == contentView.Top + topIndent
         lblStatus.Left == lblName.Right + leftIndent
         lblStatus.Width == lblWidth
-        lblStatus.Height == lblHeight
+        lblStatus.Height == lblHeight * 1.5
         
-        lblDate.Top == lblStatus.Bottom + topIndent
+        lblDate.Top == lblName.Bottom + topIndent
         lblDate.Left == lblName.Right + leftIndent
         lblDate.Width == lblWidth
         lblDate.Height == lblHeight
@@ -100,8 +95,9 @@ final class MainTableViewCell: UITableViewCell {
     private func createLbl(text: String, color: UIColor = .white) -> UILabel {
         let lbl = UILabel()
         lbl.textColor = color
+        lbl.numberOfLines = 2
+        lbl.font = .systemFont(ofSize: 15)
         lbl.text = text
-        lbl.adjustsFontSizeToFitWidth = true
         lbl.backgroundColor = .blackBG
         return lbl
     }

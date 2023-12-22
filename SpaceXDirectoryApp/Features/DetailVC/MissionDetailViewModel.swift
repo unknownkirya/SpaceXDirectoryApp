@@ -15,60 +15,69 @@ protocol MissionDetailViewModelProtocol {
 
 // MARK: - MissionDetail struct
 struct MissionDetail {
-    var icon: String?
-    var name: String
-    var firstStageReuses: Int
-    var status: String
-    var dateString: String
-    var details: String
-    var crew: [String]
+    let icon: String?
+    let name: String
+    let firstStageReuses: Int
+    let status: String
+    let dateString: String
+    let details: String
+    let crew: [String]
 }
 
 struct Crewmate {
-    var name: String
-    var agency: String
-    var status: String
+    let name: String
+    let agency: String
+    let status: String
 }
 
 // MARK: - MissionDetailViewModel
 final class MissionDetailViewModel: MissionDetailViewModelProtocol {
     
+    // MARK: - Public Property
+    let reloadTable = PublishSubject<Void>()
+    
     // MARK: - Private properties
     private let bag = DisposeBag()
-    private let reloadTable = PublishSubject<Void>()
     private let useCase = MissionDetailUseCase()
     private let repository = MissionDetailRepositoryImpl()
     private var missionDisplayItem: MissionDetail
-    private var crewmatesDisplayItems: [String: Crewmate] = [:]
+    private var crewmatesDisplayItems: [Crewmate] = []
     
     // MARK: - Life cycle
     init(displayItem: MissionElement) {
-        self.missionDisplayItem = useCase.prepareMissionItem(parameters: displayItem)
+        missionDisplayItem = useCase.prepareMissionItem(parameters: displayItem)
         
-        self.fetchData()
+        fetchData()
     }
     
     func fetchData() {
         repository.get()
+            .map { crewmates in
+                crewmates.filter { [weak self] crewmate in
+                    guard let self else { return false }
+                    
+                    return self.missionDisplayItem.crew.contains(crewmate.id)
+                }
+            }
             .subscribe(onSuccess: { [weak self] in
-                self?.crewmatesDisplayItems = self?.useCase.prepareCrewmateItem(parameters: $0) ?? [:]
-                //print($0)
-                self?.reloadTable.onNext(())
+                guard let self else { return }
+                self.crewmatesDisplayItems = self.useCase.prepareCrewmateItem(parameters: $0)
+                print(self.crewmatesDisplayItems)
+                self.reloadTable.onNext(())
             })
             .disposed(by: bag)
     }
     
     // MARK: - Public properties
     func getDisplayItem() -> MissionDetail {
-        return missionDisplayItem
+        missionDisplayItem
     }
     
     func numberOfRowsOfCrew() -> Int {
-        missionDisplayItem.crew.count
+        crewmatesDisplayItems.count
     }
     
-    func crewmateForId(id: String) -> Crewmate {
-        print(crewmatesDisplayItems)
-        return crewmatesDisplayItems[id] ?? Crewmate(name: "", agency: "", status: "")
+    func crewmateForId(for indexPath: IndexPath) -> Crewmate {
+        crewmatesDisplayItems[indexPath.row]
     }
 }

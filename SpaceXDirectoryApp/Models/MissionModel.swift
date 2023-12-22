@@ -60,7 +60,6 @@ struct Reddit: Decodable {
 typealias MissionModels = [MissionElement]
 
 // MARK: - Encode/decode helpers
-
 class JSONNull: Decodable, Hashable {
 
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {

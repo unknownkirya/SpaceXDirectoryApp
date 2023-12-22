@@ -11,23 +11,18 @@ import RxMoya
 import Moya
 
 // MARK: - MissionListRepository
-class MissionListRepository: BaseRepository {
+protocol MissionListRepository {
     
     typealias T = MissionModels
-    var missionCache: MissionModels?
+    var missionCache: MissionModels? { get }
     
-    func get() -> Single<MissionModels> {
-        fatalError("Must be overriden!")
-    }
-    
-    func clearCache(cacheElement: inout MissionModels?) {
-        cacheElement = nil
-    }
-    
+    func get() -> Single<MissionModels> 
 }
 
 // MARK: - MissionListRepositoryImpl
 final class MissionListRepositoryImpl: MissionListRepository {
+    var missionCache: MissionModels?
+    
     
     // MARK: - Private properties
     private let bag = DisposeBag()
@@ -36,13 +31,13 @@ final class MissionListRepositoryImpl: MissionListRepository {
     private let decoder = JSONDecoder()
     
     // MARK: - Life Cycle
-    override init() {
+    init() {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .iso8601
     }
     
     // MARK: - Overrided functions
-    override func get() -> Single<MissionModels> {
+    func get() -> Single<MissionModels> {
         provider.rx
             .request(.fetchMissions)
             .filterSuccessfulStatusCodes()

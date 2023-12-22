@@ -9,20 +9,28 @@ import UIKit
 import Stevia
 
 //MARK: - CrewTableViewCell
-class CrewTableViewCell: UITableViewCell {
+final class CrewTableViewCell: UITableViewCell {
     
     // MARK: - Private properties
     private lazy var lblCrewmateName: UILabel = createLbl()
     private lazy var lblAgency: UILabel = createLbl()
     private lazy var lblStatus: UILabel = createLbl()
     
+    // MARK: = Life cycle
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Public methods
     func fill(crewmateExample: Crewmate) {
         lblCrewmateName.text = crewmateExample.name
         lblAgency.text = crewmateExample.agency
         lblStatus.text = crewmateExample.status
-        
-        setupUI()
     }
     
     // MARK: Private methods
@@ -44,17 +52,17 @@ class CrewTableViewCell: UITableViewCell {
         let lblWidth: CGFloat = 85
         let lblHeight: CGFloat = 30
         
-        lblCrewmateName.Top == self.Top + topIndent
-        lblCrewmateName.Left == self.Left + leftIndent
+        lblCrewmateName.Top == contentView.Top + topIndent
+        lblCrewmateName.Left == contentView.Left + leftIndent
         lblCrewmateName.Width == lblWidth
         lblCrewmateName.Height == lblHeight
         
-        lblAgency.Top == self.Top + topIndent
+        lblAgency.Top == contentView.Top + topIndent
         lblAgency.Left == lblCrewmateName.Right + leftIndent
         lblAgency.Width == lblWidth
         lblAgency.Height == lblHeight
         
-        lblStatus.Top == self.Top + topIndent
+        lblStatus.Top == contentView.Top + topIndent
         lblStatus.Left == lblAgency.Right + leftIndent
         lblStatus.Width == lblWidth
         lblStatus.Height == lblHeight
@@ -64,7 +72,7 @@ class CrewTableViewCell: UITableViewCell {
         let lbl = UILabel()
         lbl.textAlignment = .left
         lbl.textColor = .white
-        lbl.backgroundColor = .white
+        lbl.backgroundColor = .blackBG
         
         return lbl
     }

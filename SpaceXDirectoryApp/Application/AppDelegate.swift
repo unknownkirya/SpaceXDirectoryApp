@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navigationController = UINavigationController(rootViewController: MissonListViewController(repository: MissionListRepositoryImpl()))
         
-        window = UIWindow(frame: UIScreen.main.bounds)
+        window = UIWindow()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
