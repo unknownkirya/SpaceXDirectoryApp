@@ -57,6 +57,7 @@ final class MissonListViewController: UIViewController {
     }
     
     private func setupUI() {
+        view.backgroundColor = .blackBG
         view.subviews (
             tbl
         )

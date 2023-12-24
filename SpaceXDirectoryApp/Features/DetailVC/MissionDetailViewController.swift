@@ -32,6 +32,7 @@ final class MissionDetailViewController: UIViewController {
         let tbl = UITableView()
         tbl.backgroundColor = .blackBG
         tbl.dataSource = self
+        tbl.delegate = self
         tbl.register(CrewTableViewCell.self, forCellReuseIdentifier: CrewTableViewCell.identifier)
         
         return tbl
@@ -48,7 +49,7 @@ final class MissionDetailViewController: UIViewController {
         return txt
     }()
     
-    private lazy var lblName: UILabel = createLbl(text: "", textAligment: .center)
+    private lazy var lblName: UILabel = createLbl(text: "", textAligment: .center, textSize: 23)
     private lazy var lblFlights: UILabel = createLbl(text: "")
     private lazy var lblStatus: UILabel = createLbl(text: "")
     private lazy var lblDate: UILabel = createLbl(text: "")
@@ -119,11 +120,11 @@ final class MissionDetailViewController: UIViewController {
         let leftIndent: CGFloat = 25
         let rightIndent: CGFloat = 25
         let topIndent: CGFloat = 10
-        let topIndentFromNameLbl: CGFloat = 35
+        let topIndentFromNameLbl: CGFloat = 25
         let topIndentForImg: CGFloat = 225
         let imgWidth: CGFloat = 225
         let imgHeight: CGFloat = 225
-        let lblWidth: CGFloat = 320
+        let lblWidth: CGFloat = 350
         let lblHeight: CGFloat = 30
         
         img.CenterY == view.Top + topIndentForImg
@@ -133,8 +134,8 @@ final class MissionDetailViewController: UIViewController {
         
         lblName.Top == img.Bottom + topIndent
         lblName.CenterX == view.CenterX
-        lblName.Width == lblWidth * 0.75
-        lblName.Height == lblHeight
+        lblName.Width == lblWidth
+        lblName.Height == lblHeight * 2
         
         lblFlights.Top == lblName.Bottom + topIndentFromNameLbl
         lblFlights.Left == view.Left + leftIndent
@@ -156,7 +157,7 @@ final class MissionDetailViewController: UIViewController {
         lblDetails.Width == lblWidth
         lblDetails.Height == lblHeight
         
-        txtDetails.Top == lblDetails.Bottom + (topIndent / 3)
+        txtDetails.Top == lblDetails.Bottom + topIndent / 3
         txtDetails.Left == view.Left + leftIndent
         txtDetails.Width == lblWidth
         txtDetails.Height == lblHeight * 3
@@ -166,25 +167,26 @@ final class MissionDetailViewController: UIViewController {
         lblCrew.Width == lblWidth / 2
         lblCrew.Height == lblHeight
         
-        tbl.Top == lblCrew.Bottom + topIndent / 2
+        tbl.Top == lblCrew.Bottom
         tbl.Left == view.Left + leftIndent
         tbl.Right == view.Right - rightIndent
         tbl.Bottom == view.Bottom
     }
     
-    private func createLbl(text: String, textAligment: NSTextAlignment = .left) -> UILabel {
+    private func createLbl(text: String, textAligment: NSTextAlignment = .left, textSize: CGFloat = 17) -> UILabel {
         let lbl = UILabel()
         lbl.text = text
         lbl.numberOfLines = 0
         lbl.textAlignment = textAligment
         lbl.textColor = .white
         lbl.backgroundColor = .blackBG
+        lbl.font = .systemFont(ofSize: textSize)
         
         return lbl
     }
 }
 
-// MARK: - MissionDetailViewController
+// MARK: - UITableViewDataSource
 extension MissionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRowsOfCrew()
@@ -193,11 +195,16 @@ extension MissionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tbl.dequeueReusableCell(withIdentifier: CrewTableViewCell.identifier) as? CrewTableViewCell
         guard let tblCell = cell else { return UITableViewCell() }
-        print(indexPath.row)
-        print(viewModel)
         let crewmate = viewModel.crewmateForId(for: indexPath)
         tblCell.fill(crewmateExample: crewmate)
         
         return tblCell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension MissionDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        Constants.kCellHeight / 1.6
     }
 }

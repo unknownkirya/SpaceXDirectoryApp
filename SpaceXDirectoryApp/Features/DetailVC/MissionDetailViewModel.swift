@@ -62,7 +62,6 @@ final class MissionDetailViewModel: MissionDetailViewModelProtocol {
             .subscribe(onSuccess: { [weak self] in
                 guard let self else { return }
                 self.crewmatesDisplayItems = self.useCase.prepareCrewmateItem(parameters: $0)
-                print(self.crewmatesDisplayItems)
                 self.reloadTable.onNext(())
             })
             .disposed(by: bag)

@@ -36,6 +36,7 @@ final class CrewTableViewCell: UITableViewCell {
     // MARK: Private methods
     private func setupUI() {
         backgroundColor = .blackBG
+        selectionStyle = .none
         
         subviews(
             lblCrewmateName,
@@ -47,14 +48,14 @@ final class CrewTableViewCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        let topIndent: CGFloat = 15
+        let topIndent: CGFloat = 8
         let leftIndent: CGFloat = 15
-        let lblWidth: CGFloat = 85
-        let lblHeight: CGFloat = 30
+        let lblWidth: CGFloat = 80
+        let lblHeight: CGFloat = 50
         
         lblCrewmateName.Top == contentView.Top + topIndent
-        lblCrewmateName.Left == contentView.Left + leftIndent
-        lblCrewmateName.Width == lblWidth
+        lblCrewmateName.Left == contentView.Left
+        lblCrewmateName.Width == lblWidth * 2
         lblCrewmateName.Height == lblHeight
         
         lblAgency.Top == contentView.Top + topIndent
@@ -73,6 +74,7 @@ final class CrewTableViewCell: UITableViewCell {
         lbl.textAlignment = .left
         lbl.textColor = .white
         lbl.backgroundColor = .blackBG
+        lbl.numberOfLines = 2
         
         return lbl
     }

@@ -9,38 +9,55 @@ import UIKit
 
 // MARK: - UIImageView
 extension UIImageView {
-    func load(url: String?) { // -> URLSessionTask
+    
+    private static var imageCache = NSCache<NSString, UIImage>()
+    
+    func load(url: String?, completion: (() -> Void)? = nil) {
+        // Очищаем изображение, чтобы избежать мерцания старого изображения при переиспользовании ячейки
+        image = nil
+        
+        guard let urlString = url else {
+            self.image = UIImage(named: "notFoundImage")
+            return
+        }
+        
+        // Проверяем, есть ли изображение в кэше
+        if let cachedImage = UIImageView.imageCache.object(forKey: urlString as NSString) {
+            image = cachedImage
+            completion?()
+            return
+        }
+        
+        // Преобразуем строку в URL
+        guard let imageUrl = URL(string: urlString) else {
+            self.image = UIImage(named: "notFoundImage")
+            completion?()
+            return
+        }
+        
+        // Создаем URLSessionDataTask для загрузки изображения
         DispatchQueue.global().async {
-            if let url = url {
-                if let imageUrl = URL(string: url) {
-                    let semaphore = DispatchSemaphore(value: 0)
-                    var image: UIImage?
-                    URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-                        defer {
-                            semaphore.signal()
-                        }
-                        if let error = error {
-                            print("Ошибка при загрузке изображения: \(error)")
-                            return
-                        }
-                        if let data = data {
-                            image = UIImage(data: data)
-                        }
-                    }.resume()
-                    semaphore.wait()
-                    DispatchQueue.main.async {
-                        self.image = image
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.image = UIImage(named: "notFoundImage")
-                    }
+            let task = URLSession.shared.dataTask(with: imageUrl) { [weak self] (data, response, error) in
+                guard let self = self, let data = data, error == nil else {
+                    self?.image = UIImage(named: "notFoundImage")
+                    completion?()
+                    return
                 }
-            } else {
-                DispatchQueue.main.async {
-                    self.image = UIImage(named: "notFoundImage")
+                
+                // Создаем изображение из полученных данных
+                if let downloadedImage = UIImage(data: data) {
+                    // Кэшируем изображение
+                    UIImageView.imageCache.setObject(downloadedImage, forKey: urlString as NSString)
+                    
+                    // Передаем изображение на основной поток для обновления UI
+                    DispatchQueue.main.async {
+                        self.image = downloadedImage
+                        completion?()
+                    }
                 }
             }
+            // Запускаем задачу и сохраняем ее для возможности отмены
+            task.resume()
         }
     }
 }

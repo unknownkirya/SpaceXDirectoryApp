@@ -21,7 +21,9 @@ final class MissionListRouter: BaseRouter<MissionListRouter.Route> {
         switch route {
         case let .showDetail(parameters): // parameters
             let vm = MissionDetailViewModel(displayItem: parameters)
-            return .push(vc: MissionDetailViewController(viewModel: vm))
+            let missionDetailVC = MissionDetailViewController(viewModel: vm)
+            
+            return .push(vc: missionDetailVC)
         }
     }
 }
