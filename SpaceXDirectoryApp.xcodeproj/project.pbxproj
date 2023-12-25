@@ -14,8 +14,8 @@
 		3159FCF42B30750200E66866 /* MissionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCF32B30750200E66866 /* MissionDetailViewModel.swift */; };
 		3159FCF82B3088AC00E66866 /* MissionListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCF72B3088AC00E66866 /* MissionListUseCase.swift */; };
 		3159FCFC2B31919000E66866 /* MissionDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCFB2B31919000E66866 /* MissionDetailUseCase.swift */; };
-		3159FCFE2B32F78D00E66866 /* BaseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCFD2B32F78D00E66866 /* BaseUseCase.swift */; };
 		3159FD002B33085D00E66866 /* CrewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3159FCFF2B33085D00E66866 /* CrewTableViewCell.swift */; };
+		31B49A412B39992B002B2A1B /* RequestBodyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B49A402B39992A002B2A1B /* RequestBodyModel.swift */; };
 		8E7CA0832B22EFDD0031CA29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA0822B22EFDD0031CA29 /* AppDelegate.swift */; };
 		8E7CA0872B22EFDD0031CA29 /* MissonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA0862B22EFDD0031CA29 /* MissonListViewController.swift */; };
 		8E7CA08C2B22EFE00031CA29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E7CA08B2B22EFE00031CA29 /* Assets.xcassets */; };
@@ -46,8 +46,8 @@
 		3159FCF32B30750200E66866 /* MissionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailViewModel.swift; sourceTree = "<group>"; };
 		3159FCF72B3088AC00E66866 /* MissionListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionListUseCase.swift; sourceTree = "<group>"; };
 		3159FCFB2B31919000E66866 /* MissionDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailUseCase.swift; sourceTree = "<group>"; };
-		3159FCFD2B32F78D00E66866 /* BaseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUseCase.swift; sourceTree = "<group>"; };
 		3159FCFF2B33085D00E66866 /* CrewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewTableViewCell.swift; sourceTree = "<group>"; };
+		31B49A402B39992A002B2A1B /* RequestBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBodyModel.swift; sourceTree = "<group>"; };
 		8E7CA07F2B22EFDD0031CA29 /* SpaceXDirectoryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceXDirectoryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E7CA0822B22EFDD0031CA29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E7CA0862B22EFDD0031CA29 /* MissonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissonListViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +136,7 @@
 			children = (
 				8E7CA0A82B22FF530031CA29 /* MissionModel.swift */,
 				314DB4682B3317BC0034FA81 /* CrewmateModel.swift */,
+				31B49A402B39992A002B2A1B /* RequestBodyModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,7 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				8ED604B12B27205F00371A41 /* BaseRouter.swift */,
-				3159FCFD2B32F78D00E66866 /* BaseUseCase.swift */,
 				8E7CA0B32B2337900031CA29 /* Constants.swift */,
 			);
 			path = Core;
@@ -300,11 +300,11 @@
 				8ED604B92B2734DC00371A41 /* API.swift in Sources */,
 				314DB4692B3317BC0034FA81 /* CrewmateModel.swift in Sources */,
 				8ED604B72B27324A00371A41 /* MissionDetailViewController.swift in Sources */,
+				31B49A412B39992B002B2A1B /* RequestBodyModel.swift in Sources */,
 				3159FCF42B30750200E66866 /* MissionDetailViewModel.swift in Sources */,
 				8E7CA0AF2B230EE80031CA29 /* MissionListTableViewCell.swift in Sources */,
 				8ED604B52B2723F500371A41 /* MissionListRouter.swift in Sources */,
 				8E7CA0B12B2318910031CA29 /* MissionListViewModel.swift in Sources */,
-				3159FCFE2B32F78D00E66866 /* BaseUseCase.swift in Sources */,
 				314DB46B2B3318A10034FA81 /* MissionDetailRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

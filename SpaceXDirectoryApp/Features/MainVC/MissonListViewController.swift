@@ -14,8 +14,10 @@ import RxCocoa
 final class MissonListViewController: UIViewController {
     
     // MARK: - Private properties
-    private let viewModel: MissionListViewModel
+    private let viewModel: MissonListViewModelProtocol
     private let bag = DisposeBag()
+    
+    private var currentPage = 1
     private lazy var router = MissionListRouter(navigationController: navigationController)
     
     private lazy var tbl: UITableView = {
@@ -46,7 +48,7 @@ final class MissonListViewController: UIViewController {
         setupUI()
     }
     
-    // MARK: - Private methods
+    // MARK: - Private functions
     private func setupBindings() {
         viewModel.reloadTable
             .asDriver(onErrorDriveWith: .never())
@@ -103,8 +105,18 @@ extension MissonListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let missionCacheElement = viewModel.repository.missionCache?[indexPath.row] else { return }
+        let missionCacheElement = viewModel.repository.missionCache[indexPath.row]
         router.run(route: .showDetail(parameters: missionCacheElement))
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if viewModel.numberOfRows() >= currentPage * 10, offsetY > contentHeight - height {
+            currentPage += 1
+            viewModel.fetchData(page: currentPage)
+        }
+    }
 }
-

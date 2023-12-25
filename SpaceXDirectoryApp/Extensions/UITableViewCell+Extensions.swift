@@ -10,6 +10,8 @@ import UIKit
 
 // MARK: - UITableViewCell
 extension UITableViewCell {
+    
+    // MARK: - Static property
     static var identifier: String {
         String(describing: self)
     }

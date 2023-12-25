@@ -14,7 +14,7 @@ import RxCocoa
 final class MissionDetailViewController: UIViewController {
     
     // MARK: - Public properties
-    var viewModel: MissionDetailViewModel
+    var viewModel: MissionDetailViewModelProtocol
     
     // MARK: Private properties
     private let displayItem: MissionDetail

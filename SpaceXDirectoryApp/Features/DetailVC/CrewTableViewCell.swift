@@ -26,14 +26,14 @@ final class CrewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public methods
+    // MARK: - Public functions
     func fill(crewmateExample: Crewmate) {
         lblCrewmateName.text = crewmateExample.name
         lblAgency.text = crewmateExample.agency
         lblStatus.text = crewmateExample.status
     }
     
-    // MARK: Private methods
+    // MARK: Private functions
     private func setupUI() {
         backgroundColor = .blackBG
         selectionStyle = .none

@@ -9,9 +9,9 @@ import Foundation
 
 // MARK: - CrewmateModel
 struct CrewmateModel: Decodable {
-    let name, agency: String
-    let status: String
+    let name, agency, status: String
     let id: String
 }
 
+// MARK: - CrewmateModels typealias
 typealias CrewmateModels = [CrewmateModel]

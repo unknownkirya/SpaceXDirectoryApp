@@ -11,19 +11,6 @@ import Foundation
 final class MissionDetailUseCase {
     
     // MARK: - Public functions
-    func prepareSortedItems(parametrs: MissionModels) -> MissionModels {
-        let dateToCheck = Constants.formatter.date(from: "01-01-2021") ?? Date()
-        var sortedMissionModels: MissionModels = []
-        
-        parametrs.forEach { element in
-            let date = element.dateLocal
-            if date > dateToCheck {
-                sortedMissionModels.append(element)
-            }
-        }
-        return sortedMissionModels.sorted(by: { $0.dateLocal > $1.dateLocal })
-    }
-    
     func prepareMissionItem(parameters: MissionElement) -> MissionDetail {
         Constants.formatter.dateFormat = "dd-MM-yy"
         let name = parameters.name

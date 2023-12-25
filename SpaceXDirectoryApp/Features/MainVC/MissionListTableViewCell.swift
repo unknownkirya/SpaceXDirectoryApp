@@ -34,7 +34,7 @@ final class MainTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public methods
+    // MARK: - Public functions
     func fill(missionModel: Mission) {
         img.load(url: missionModel.icon)
         lblName.text = missionModel.name
@@ -43,7 +43,7 @@ final class MainTableViewCell: UITableViewCell {
         lblDate.text = "Date: \(missionModel.dateString)"
     }
     
-    // MARK: - Private methods
+    // MARK: - Private functions
     private func setupUI() {
         backgroundColor = .blackBG
         selectionStyle = .none

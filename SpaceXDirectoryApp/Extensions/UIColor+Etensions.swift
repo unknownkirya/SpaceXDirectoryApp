@@ -10,6 +10,8 @@ import UIKit
 
 // MARK: - UIColor
 extension UIColor? {
+    
+    // MARK: - Static property
     static var blackBG: UIColor {
         return #colorLiteral(red: 0.01454054657, green: 0.04676309973, blue: 0.1187527403, alpha: 1)
     }

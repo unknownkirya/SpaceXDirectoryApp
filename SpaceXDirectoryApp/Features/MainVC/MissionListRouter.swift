@@ -10,16 +10,17 @@ import RxSwift
 
 // MARK: - MissonsLIstRouter
 final class MissionListRouter: BaseRouter<MissionListRouter.Route> {
-  
-  enum Route {
-      case showDetail(parameters: MissionElement) // parameters: MissionDetailParameters
-  }
-  
-    // MARK: - Overrided methods
+    
+    // MARK: - Route enum
+    enum Route {
+        case showDetail(parameters: MissionElement)
+    }
+    
+    // MARK: - Overrided functions
     override func prepareTransition(for route: Route,
                                     with result: PublishSubject<Any?>?) -> NavigationTransition?{
         switch route {
-        case let .showDetail(parameters): // parameters
+        case let .showDetail(parameters):
             let vm = MissionDetailViewModel(displayItem: parameters)
             let missionDetailVC = MissionDetailViewController(viewModel: vm)
             

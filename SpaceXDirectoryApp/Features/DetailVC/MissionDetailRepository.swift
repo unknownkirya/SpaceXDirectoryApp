@@ -22,7 +22,6 @@ final class MissionDetailRepositoryImpl: MissionDetailRepository {
     
     // MARK: Private properties
     private let bag = DisposeBag()
-    private let baseUseCase = BaseUseCase()
     private let provider = MoyaProvider<API>()
     private let decoder = JSONDecoder()
     

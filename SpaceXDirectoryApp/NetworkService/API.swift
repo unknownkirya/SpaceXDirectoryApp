@@ -10,7 +10,7 @@ import Moya
 
 // MARK: - API Enum
 enum API {
-    case fetchMissions
+    case fetchMissions(parameters: RequestBodyModel)
     case fetchCrewmates
 }
 
@@ -24,7 +24,7 @@ extension API: TargetType {
     var path: String {
         switch self {
         case .fetchMissions:
-            return "launches"
+            return "launches/query"
         case .fetchCrewmates:
             return "crew"
         }
@@ -32,14 +32,21 @@ extension API: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .fetchMissions, .fetchCrewmates:
+        case .fetchMissions:
+            return .post
+        case .fetchCrewmates:
             return .get
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .fetchMissions, .fetchCrewmates:
+        case let .fetchMissions(parameters):
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            
+            return .requestCustomJSONEncodable(parameters, encoder: encoder)
+        case .fetchCrewmates:
             return .requestPlain
         }
     }

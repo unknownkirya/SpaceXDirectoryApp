@@ -10,8 +10,13 @@ import RxSwift
 
 // MARK: - MissonListViewModelProtocol
 protocol MissonListViewModelProtocol {
-    func fetchData()
+    
+    var reloadTable: PublishSubject<Void> { get }
+    var repository: MissionListRepository { get }
+    
+    func fetchData(page: Int)
     func numberOfRows() -> Int
+    func recieveMission(indexPath: IndexPath) -> Mission
 }
 
 // MARK: - Struct
@@ -33,7 +38,6 @@ final class MissionListViewModel: MissonListViewModelProtocol {
     
     // MARK: - Private properties
     private let bag = DisposeBag()
-    private let baseUseCase = BaseUseCase()
     private let missionListUseCase = MissionListUseCase()
     private var displayItems: [Mission] = []
     
@@ -41,17 +45,19 @@ final class MissionListViewModel: MissonListViewModelProtocol {
     init(repository: MissionListRepository) {
         self.repository = repository
         
-        fetchData()
+        fetchData(page: 1)
     }
     
-    // MARK: - flow
-    func fetchData() {
-        repository.get()
+    // MARK: - Public functions
+    func fetchData(page: Int) {
+        let query: Query = Query(dateUtc: DateUtc(gte: "2021-01-01T00:00:00.000Z"))
+        let options: Options = Options(sort: Sort(dateUtc: "desc"), page: page, limit: 10)
+        let requestBodyModel: RequestBodyModel = RequestBodyModel(query: query, options: options)
+        
+        repository.get(requestBodyModel: requestBodyModel)
             .subscribe(onSuccess: { [weak self] in
-                if let exampleModel = self?.baseUseCase.filterModel(exampleModel: $0) {
-                    self?.displayItems = self?.missionListUseCase.prepareItems(exampleModel: exampleModel) ?? []
-                    self?.reloadTable.onNext(())
-                }
+                self?.displayItems.append(contentsOf: self?.missionListUseCase.prepareItems(exampleModel: $0.docs) ?? [])
+                self?.reloadTable.onNext(())
             })
             .disposed(by: bag)
     }

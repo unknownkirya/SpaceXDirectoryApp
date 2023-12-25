@@ -24,6 +24,8 @@ final class MissionListUseCase {
     
     // MARK: - Private function
     private func prepareItem(parameters: MissionElement) -> Mission {
+        Constants.formatter.dateFormat = "dd-MM-YY"
+        
         let name = parameters.name
         let firstStageReuses = parameters.cores.reduce(0) { result, core in
             result + (core.flight ?? 0)

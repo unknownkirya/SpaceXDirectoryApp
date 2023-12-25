@@ -11,6 +11,13 @@ import RxSwift
 // MARK: - MissionDetailViewModelProtocol
 protocol MissionDetailViewModelProtocol {
     
+    var reloadTable: PublishSubject<Void> { get }
+    
+    func fetchData()
+    func getDisplayItem() -> MissionDetail
+    func numberOfRowsOfCrew() -> Int
+    func crewmateForId(for indexPath: IndexPath) -> Crewmate
+    
 }
 
 // MARK: - MissionDetail struct
@@ -50,6 +57,7 @@ final class MissionDetailViewModel: MissionDetailViewModelProtocol {
         fetchData()
     }
     
+    // MARK: - Public functions
     func fetchData() {
         repository.get()
             .map { crewmates in
@@ -66,8 +74,7 @@ final class MissionDetailViewModel: MissionDetailViewModelProtocol {
             })
             .disposed(by: bag)
     }
-    
-    // MARK: - Public properties
+
     func getDisplayItem() -> MissionDetail {
         missionDisplayItem
     }
