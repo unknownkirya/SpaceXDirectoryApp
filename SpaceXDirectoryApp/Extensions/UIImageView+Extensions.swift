@@ -13,7 +13,7 @@ extension UIImageView {
     // MARK: - Private static property
     private static var imageCache = NSCache<NSString, UIImage>()
     
-    // MARK: - Public function
+    // MARK: - Public method
     func load(url: String?, completion: (() -> Void)? = nil) {
 
         image = nil

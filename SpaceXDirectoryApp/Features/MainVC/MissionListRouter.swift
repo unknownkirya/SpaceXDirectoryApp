@@ -16,7 +16,7 @@ final class MissionListRouter: BaseRouter<MissionListRouter.Route> {
         case showDetail(parameters: MissionElement)
     }
     
-    // MARK: - Overrided functions
+    // MARK: - Overrided methods
     override func prepareTransition(for route: Route,
                                     with result: PublishSubject<Any?>?) -> NavigationTransition?{
         switch route {

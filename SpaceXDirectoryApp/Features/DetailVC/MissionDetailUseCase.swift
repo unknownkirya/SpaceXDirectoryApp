@@ -10,7 +10,7 @@ import Foundation
 // MARK: - MissionDetailUseCase
 final class MissionDetailUseCase {
     
-    // MARK: - Public functions
+    // MARK: - Public methods
     func prepareMissionItem(parameters: MissionElement) -> MissionDetail {
         Constants.formatter.dateFormat = "dd-MM-yy"
         let name = parameters.name

@@ -26,14 +26,14 @@ final class CrewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public functions
+    // MARK: - Public method
     func fill(crewmateExample: Crewmate) {
         lblCrewmateName.text = crewmateExample.name
         lblAgency.text = crewmateExample.agency
         lblStatus.text = crewmateExample.status
     }
     
-    // MARK: Private functions
+    // MARK: Private methods
     private func setupUI() {
         backgroundColor = .blackBG
         selectionStyle = .none
@@ -48,25 +48,25 @@ final class CrewTableViewCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        let topIndent: CGFloat = 8
-        let leftIndent: CGFloat = 15
-        let lblWidth: CGFloat = 80
-        let lblHeight: CGFloat = 50
+        let cTopIndent: CGFloat = 8
+        let cLeftIndent: CGFloat = 15
+        let cLblWidth: CGFloat = 80
+        let cLblHeight: CGFloat = 50
         
-        lblCrewmateName.Top == contentView.Top + topIndent
+        lblCrewmateName.Top == contentView.Top + cTopIndent
         lblCrewmateName.Left == contentView.Left
-        lblCrewmateName.Width == lblWidth * 2
-        lblCrewmateName.Height == lblHeight
+        lblCrewmateName.Width == cLblWidth * 2
+        lblCrewmateName.Height == cLblHeight
         
-        lblAgency.Top == contentView.Top + topIndent
-        lblAgency.Left == lblCrewmateName.Right + leftIndent
-        lblAgency.Width == lblWidth
-        lblAgency.Height == lblHeight
+        lblAgency.Top == contentView.Top + cTopIndent
+        lblAgency.Left == lblCrewmateName.Right + cLeftIndent
+        lblAgency.Width == cLblWidth
+        lblAgency.Height == cLblHeight
         
-        lblStatus.Top == contentView.Top + topIndent
-        lblStatus.Left == lblAgency.Right + leftIndent
-        lblStatus.Width == lblWidth
-        lblStatus.Height == lblHeight
+        lblStatus.Top == contentView.Top + cTopIndent
+        lblStatus.Left == lblAgency.Right + cLeftIndent
+        lblStatus.Width == cLblWidth
+        lblStatus.Height == cLblHeight
     }
     
     private func createLbl() -> UILabel {

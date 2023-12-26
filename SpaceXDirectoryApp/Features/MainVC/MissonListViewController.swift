@@ -13,7 +13,7 @@ import RxCocoa
 // MARK: - MissonListViewController
 final class MissonListViewController: UIViewController {
     
-    // MARK: - Private properties
+    // MARK: - Private methods
     private let viewModel: MissonListViewModelProtocol
     private let bag = DisposeBag()
     
@@ -48,7 +48,7 @@ final class MissonListViewController: UIViewController {
         setupUI()
     }
     
-    // MARK: - Private functions
+    // MARK: - Private methods
     private func setupBindings() {
         viewModel.reloadTable
             .asDriver(onErrorDriveWith: .never())

@@ -30,7 +30,7 @@ final class MissionDetailRepositoryImpl: MissionDetailRepository {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
     
-    // MARK: - Public function
+    // MARK: - Public method
     func get() -> Single<CrewmateModels> {
         provider.rx
             .request(.fetchCrewmates)

@@ -23,10 +23,9 @@ protocol MissonListViewModelProtocol {
 struct Mission {
     let icon: String?
     let name: String
-    let firstStageReuses: Int
-    let success: String
+    var firstStageReuses: Int
+    var status: String
     let dateString: String
-    let date: Date
 }
 
 // MARK: - MainViewModel
@@ -48,7 +47,7 @@ final class MissionListViewModel: MissonListViewModelProtocol {
         fetchData(page: 1)
     }
     
-    // MARK: - Public functions
+    // MARK: - Public methods
     func fetchData(page: Int) {
         let query: Query = Query(dateUtc: DateUtc(gte: "2021-01-01T00:00:00.000Z"))
         let options: Options = Options(sort: Sort(dateUtc: "desc"), page: page, limit: 10)

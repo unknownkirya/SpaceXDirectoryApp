@@ -76,7 +76,7 @@ final class MissionDetailViewController: UIViewController {
         setupUI()
     }
     
-    // MARK: - Private functions
+    // MARK: - Private methods
     private func fill() {
         img.load(url: displayItem.icon)
         lblName.text = displayItem.name
@@ -121,13 +121,13 @@ final class MissionDetailViewController: UIViewController {
         let rightIndent: CGFloat = 25
         let topIndent: CGFloat = 10
         let topIndentFromNameLbl: CGFloat = 25
-        let topIndentForImg: CGFloat = 225
+        let topIndentForImg: CGFloat = 125
         let imgWidth: CGFloat = 225
         let imgHeight: CGFloat = 225
         let lblWidth: CGFloat = 350
         let lblHeight: CGFloat = 30
         
-        img.CenterY == view.Top + topIndentForImg
+        img.Top == view.Top + topIndentForImg
         img.CenterX == view.CenterX
         img.Width == imgWidth
         img.Height == imgHeight

@@ -57,7 +57,7 @@ final class MissionDetailViewModel: MissionDetailViewModelProtocol {
         fetchData()
     }
     
-    // MARK: - Public functions
+    // MARK: - Public methods
     func fetchData() {
         repository.get()
             .map { crewmates in

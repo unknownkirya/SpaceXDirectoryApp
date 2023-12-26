@@ -36,7 +36,7 @@ final class MissionListRepositoryImpl: MissionListRepository {
         decoder.dateDecodingStrategy = .iso8601
     }
     
-    // MARK: - Public properties
+    // MARK: - Public methods
     func get(requestBodyModel: RequestBodyModel) -> Single<QueryiesModel> {
         provider.rx
             .request(.fetchMissions(parameters: requestBodyModel))

@@ -11,7 +11,7 @@ import Foundation
 final class MissionListUseCase {
     
     
-    // MARK: - Public function
+    // MARK: - Public method
     func prepareItems(exampleModel: MissionModels) -> [Mission] {
         var displayItems: [Mission] = []
         
@@ -22,7 +22,7 @@ final class MissionListUseCase {
         return displayItems
     }
     
-    // MARK: - Private function
+    // MARK: - Private method
     private func prepareItem(parameters: MissionElement) -> Mission {
         Constants.formatter.dateFormat = "dd-MM-YY"
         
@@ -35,9 +35,9 @@ final class MissionListUseCase {
         let successString = success ? "Success" : "Not success"
         
         guard let icon = parameters.links.patch.small else {
-            return Mission(icon: nil, name: name, firstStageReuses: firstStageReuses, success: successString, dateString: date, date: parameters.dateLocal)
+            return Mission(icon: nil, name: name, firstStageReuses: firstStageReuses, status: successString, dateString: date)
         }
               
-        return Mission(icon: icon, name: name, firstStageReuses: firstStageReuses, success: successString, dateString: date, date: parameters.dateLocal)
+        return Mission(icon: icon, name: name, firstStageReuses: firstStageReuses, status: successString, dateString: date)
     }
 }

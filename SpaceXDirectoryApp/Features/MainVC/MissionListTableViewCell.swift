@@ -34,16 +34,16 @@ final class MainTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public functions
+    // MARK: - Public methods
     func fill(missionModel: Mission) {
         img.load(url: missionModel.icon)
         lblName.text = missionModel.name
         lblFlights.text = "First stage reuses: \(String(missionModel.firstStageReuses))"
-        lblStatus.text = "Status: \(missionModel.success)"
+        lblStatus.text = "Status: \(missionModel.status)"
         lblDate.text = "Date: \(missionModel.dateString)"
     }
     
-    // MARK: - Private functions
+    // MARK: - Private methods
     private func setupUI() {
         backgroundColor = .blackBG
         selectionStyle = .none
@@ -59,37 +59,37 @@ final class MainTableViewCell: UITableViewCell {
     }
     
     private func createConstraints() {
-        let leftIndent: CGFloat = 12
-        let topIndent: CGFloat = 8
-        let imgWidth: CGFloat = 65
-        let imgHeight: CGFloat = 65
-        let lblWidth: CGFloat = 145
-        let lblHeight: CGFloat = 25
+        let cLeftIndent: CGFloat = 12
+        let cTopIndent: CGFloat = 8
+        let cImgWidth: CGFloat = 65
+        let cImgHeight: CGFloat = 65
+        let cLblWidth: CGFloat = 145
+        let cLblHeight: CGFloat = 25
         
         img.CenterY == contentView.CenterY
-        img.Left == contentView.Left + leftIndent
-        img.Width == imgWidth
-        img.Height == imgHeight
+        img.Left == contentView.Left + cLeftIndent
+        img.Width == cImgWidth
+        img.Height == cImgHeight
         
-        lblName.Top == contentView.Top + topIndent
-        lblName.Left == img.Right + leftIndent
-        lblName.Width == lblWidth
-        lblName.Height == lblHeight * 1.5
+        lblName.Top == contentView.Top + cTopIndent
+        lblName.Left == img.Right + cLeftIndent
+        lblName.Width == cLblWidth
+        lblName.Height == cLblHeight * 1.5
         
-        lblFlights.Top == lblName.Bottom + topIndent
-        lblFlights.Left == img.Right + leftIndent
-        lblFlights.Width == lblWidth
-        lblFlights.Height == lblHeight
+        lblFlights.Top == lblName.Bottom + cTopIndent
+        lblFlights.Left == img.Right + cLeftIndent
+        lblFlights.Width == cLblWidth
+        lblFlights.Height == cLblHeight
         
-        lblStatus.Top == contentView.Top + topIndent
-        lblStatus.Left == lblName.Right + leftIndent
-        lblStatus.Width == lblWidth
-        lblStatus.Height == lblHeight * 1.5
+        lblStatus.Top == contentView.Top + cTopIndent
+        lblStatus.Left == lblName.Right + cLeftIndent
+        lblStatus.Width == cLblWidth
+        lblStatus.Height == cLblHeight * 1.5
         
-        lblDate.Top == lblName.Bottom + topIndent
-        lblDate.Left == lblName.Right + leftIndent
-        lblDate.Width == lblWidth
-        lblDate.Height == lblHeight
+        lblDate.Top == lblName.Bottom + cTopIndent
+        lblDate.Left == lblName.Right + cLeftIndent
+        lblDate.Width == cLblWidth
+        lblDate.Height == cLblHeight
     }
     
     private func createLbl(text: String, color: UIColor = .white) -> UILabel {
